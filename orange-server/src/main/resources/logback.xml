@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 定义日志文件的存储位置 -->
+    <property name="LOG_HOME" value="./logs" />
+
+    <!-- 控制台输出配置 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 需要更多ai 一下 有输入文件的，有错误文件单独输出的，还可以设置不同包和类的日志级别 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+<!--        <appender-ref ref="FILE" />-->
+<!--        <appender-ref ref="ERROR_FILE" />-->
+    </root>
+</configuration>

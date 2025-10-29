@@ -1,0 +1,43 @@
+#在yml格式的配置文件中，如果配置项的值是以0 开头的，值需要使用'"
+#引起来，因为以0开头在yml中表示8进制的数据。
+spring:
+  application:
+    name: springboot-mybatis-quickstart
+  datasource:
+    url: jdbc:mysql://localhost:3306
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+#   type: om.alibaba.druid.pool.DruidDatasource//连接池选择
+#mybatis的日志输出
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true #驼峰映射启动不然得手动起别名
+  mapper-locations: classpath:mapper/*.xml #映射地址
+
+pagehelper:
+  reasonable: true #页合理化参数，默认值为false。当该参数设置为true时，
+    #pageNum<=0时会查询第一页，pageNum>pages（超过总数时），会查询最后一页。
+  #默认false 时，直接根据参数进行查询。
+  helper-dialect: mysql
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: orange-chen
+    region: cn-beijing
+
+
+
+
+
