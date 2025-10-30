@@ -3,17 +3,25 @@ package com.orange.controller.admin;
 import com.orange.dto.EmpPageQueryDTO;
 import com.orange.result.PageResult;
 import com.orange.result.Result;
+import com.orange.service.impl.EmpServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 
 public class EmpController {
+    /**
+     * 分页查询,根据名字模糊查询
+     */
+    @Autowired
+    private EmpServiceImpl empService;
     @GetMapping("/admin/employee/page")
     public Result<PageResult> page(EmpPageQueryDTO empPageQueryDTO) {
         log.info("分页查询,{}",empPageQueryDTO);
+        PageResult pageResult = empService.page(empPageQueryDTO);
 
-        Result.success();
+        return Result.success(pageResult);
     }
 }
