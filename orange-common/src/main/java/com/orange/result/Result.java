@@ -20,12 +20,14 @@ public class Result<T> {
     public static <T> Result<T> success() {
         Result<T> result = new Result<>();
         result.code = 1;
+        result.msg = "success";
         return result;
     }
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<T>();//T可以省略，使用钻石操作符<>
         result.code = 1 ;
         result.data = data;
+        result.msg = "success";
         return result;
     }
     public static <T> Result<T> error(String msg) {

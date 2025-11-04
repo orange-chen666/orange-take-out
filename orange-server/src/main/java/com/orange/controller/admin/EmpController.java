@@ -1,11 +1,14 @@
 package com.orange.controller.admin;
 
 import com.orange.dto.EmpDTO;
+import com.orange.dto.EmpLoginDTO;
 import com.orange.dto.EmpPageQueryDTO;
+import com.orange.dto.EmpPwdDTO;
 import com.orange.entity.Emp;
 import com.orange.result.PageResult;
 import com.orange.result.Result;
 import com.orange.service.impl.EmpServiceImpl;
+import com.orange.vo.EmpLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +39,14 @@ public class EmpController {
         empService.add(empDTO);
         return  Result.success();
     }
+    /**
+     * 员工登录
+     */
+    @PostMapping("/login")
+    public Result<EmpLoginVO> login(@RequestBody EmpLoginDTO empLoginDTO) {
+        log.info("员工登录{}",empLoginDTO);
+         EmpLoginVO empLoginVO = empService.login(empLoginDTO);
+        return Result.success(empLoginVO);
 
+    }
 }
