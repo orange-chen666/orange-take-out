@@ -2,6 +2,7 @@ package com.orange.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.orange.constant.JwtClaimsConstant;
 import com.orange.dto.EmpDTO;
 import com.orange.dto.EmpLoginDTO;
 import com.orange.dto.EmpPageQueryDTO;
@@ -71,7 +72,7 @@ public class EmpServiceImpl implements EmpService {
             log.info("无该用户名");//以后可以抛异常
             throw new RuntimeException("员工账号错误");
         }
-        if (!emp.equals(password)) {
+        if (!password.equals(emp.getPassword())) {
             log.info("密码错误");
             throw new RuntimeException("密码错误");
         }
@@ -80,11 +81,12 @@ public class EmpServiceImpl implements EmpService {
             throw new RuntimeException("员工被锁定");
         }
         Map<String,Object> claims = new HashMap<>();
-        claims.put("emp_id",emp.getId());//实在是emp_id太常用了改成常量吧
-        claims.put("emp_username",emp.getUsername());
+        claims.put(JwtClaimsConstant.EMP_ID,emp.getId());//实在是emp_id太常用了改成常量吧
+        claims.put(JwtClaimsConstant.USER_ID,emp.getUsername());
 
 
         String token = JwtUtil.creatJWT(jwtProperties.getAdminSecretKey(), claims, jwtProperties.getAdminTtl());
+        log.info("生成token{}:",token);
 //        EmpLoginVO empLoginVO = new EmpLoginVO();
 //        empLoginVO.setId(emp.getId());
 //        empLoginVO.setName(emp.getName());

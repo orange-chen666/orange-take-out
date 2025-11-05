@@ -14,6 +14,7 @@ public class JwtUtil {
 //        JwtProperties a = new JwtProperties();
 //        a.getAdminSecretKey();
 //        new JwtProperties()直接创建对象，绕过了Spring的IoC容器
+        //报错了密钥长度过短JWT密钥长度不够。HS256算法要求密钥长度至少为256位（32字节）
         long expMills = System.currentTimeMillis() + ttlMillis;//毫秒的？
         Date date = new Date(expMills);
         return Jwts.builder().
@@ -26,7 +27,7 @@ public class JwtUtil {
         return Jwts.parserBuilder().
                 setSigningKey(SecretKey).
                 build().
-                parseClaimsJwt(token).
+                parseClaimsJws(token).////源码会抛异常的
                 getBody();
     }
 }

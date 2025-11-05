@@ -25,7 +25,8 @@ public interface EmpMapper {
     /**
      * 登录
      */
-    @Select("select * from employee where #{username}")
+    @Select("select * from employee where username = #{username}")
+    //一开始将是"select * from employee where #{username}"少了username =
     Emp login(String username);
 }
 

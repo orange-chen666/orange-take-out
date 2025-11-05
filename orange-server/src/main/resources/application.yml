@@ -41,7 +41,7 @@ aliyun:
 orange:
   jwt:
     # 设置jwt签名加密时使用的秘钥
-    admin-secret-key: orange-a-good-take-out-i-like-it-very-much
+    admin-secret-key: orangeagoodtakeoutilikeitverymuchxixizdsadwdfwadwadda #密钥不能带 '-'，长度要256位,所以我
     # 设置jwt过期时间
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
