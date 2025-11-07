@@ -18,4 +18,6 @@ public interface EmpService {
     void editPwd(EmpPwdDTO empPwdDTO);
 
     EmpLoginVO login(EmpLoginDTO empLoginDTO);
+
+    void startOrStop(Integer status,Integer id);
 }

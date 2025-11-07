@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/emp")
 
 public class EmpController {
-    /**
-     * 分页查询,根据名字模糊查询
-     */
+
     @Autowired
     private EmpServiceImpl empService;
+    /**
+     * 分页查询
+     * 根据名字模糊查询
+     */
     @GetMapping("/page")
     public Result<PageResult> page(EmpPageQueryDTO empPageQueryDTO) {
         log.info("分页查询,{}",empPageQueryDTO);
@@ -49,4 +51,14 @@ public class EmpController {
         return Result.success(empLoginVO);
 
     }
+    /**
+     * 启用、禁用员工账号
+     */
+    @PostMapping("/status/{status}")//暂时不明白id的意思但是@PathVariable是根据url获取状态
+    public Result startOrStop (@PathVariable Integer status,Integer id) {
+        log.info("根据id启用、禁用员工账号：{}",id);
+        empService.startOrStop(status,id);
+        return Result.success();
+    }
+
 }

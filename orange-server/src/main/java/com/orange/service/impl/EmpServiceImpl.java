@@ -49,8 +49,8 @@ public class EmpServiceImpl implements EmpService {
     public void add(EmpDTO empDTO) {
         Emp emp = new Emp();
         BeanUtils.copyProperties(empDTO,emp);// 正确：从 empDTO 复制到 emp
-        emp.setCreateTime(LocalDateTime.now());
-        emp.setUpdateTime(LocalDateTime.now());
+//        emp.setCreateTime(LocalDateTime.now());有了公共字段填充不需要了
+//        emp.setUpdateTime(LocalDateTime.now());
         emp.setPassword("123456");
         emp.setStatus(1);
         emp.setUpdateUser(1L);
@@ -100,6 +100,10 @@ public class EmpServiceImpl implements EmpService {
                 token(token).
                 build();
         return empLoginVO;
+    }
 
+    @Override
+    public void startOrStop(Integer status,Integer id) {
+        empMapper.starOrStop(status,id);
     }
 }
