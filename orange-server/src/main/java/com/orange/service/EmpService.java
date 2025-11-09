@@ -19,5 +19,11 @@ public interface EmpService {
 
     EmpLoginVO login(EmpLoginDTO empLoginDTO);
 
-    void startOrStop(Integer status,Integer id);
+    void startOrStop(Integer status,Long id);
+
+    void update(EmpDTO empDTO);
+
+    void deleteById(Long id);
+
+    Emp queryById(Long id);
 }

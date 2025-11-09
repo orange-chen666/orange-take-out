@@ -5,10 +5,7 @@ import com.orange.annotation.AutoFill;
 import com.orange.dto.EmpPageQueryDTO;
 import com.orange.entity.Emp;
 import com.orange.enumeration.OperationType;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface EmpMapper {
@@ -33,8 +30,12 @@ public interface EmpMapper {
     //一开始将是"select * from employee where #{username}"少了username =
     Emp login(String username);
 
-    @Update("update employee set status = #{status} where id = #{id}")
+
     @AutoFill(value = OperationType.UPDATE)
-    void starOrStop(Integer status, Integer id);
+    void update(Emp emp);
+    @Delete("delete from employee where id = #{id}")
+    void deleteById(Long id);
+    @Select("select * from employee where id = #{id}")//老是只写id =
+    Emp queryById(Long id);
 }
 

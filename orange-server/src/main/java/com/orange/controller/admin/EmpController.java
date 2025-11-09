@@ -55,10 +55,37 @@ public class EmpController {
      * 启用、禁用员工账号
      */
     @PostMapping("/status/{status}")//暂时不明白id的意思但是@PathVariable是根据url获取状态
-    public Result startOrStop (@PathVariable Integer status,Integer id) {
+    public Result startOrStop (@PathVariable Integer status,Long id) {
         log.info("根据id启用、禁用员工账号：{}",id);
         empService.startOrStop(status,id);
         return Result.success();
     }
+    /**
+     *编辑员工信息
+     */
+    @PutMapping
+    public Result update(@RequestBody EmpDTO empDTO) {
+        log.info("编辑员工信息:{}",empDTO);
+        empService.update(empDTO);
+        return Result.success();
+    }
+    /**
+     * 根据id删除员工
+     */
+    @DeleteMapping("/delete")
+    public Result deleteById(Long id) {
+        log.info("被删除id：{}",id);
+        empService.deleteById(id);
+        return Result.success();
+    }
+    /**
+     * 根据Id查询
+     */
+    @GetMapping("/{id}")
+    public Result<Emp> queryById(@PathVariable Long id) {
+        log.info("id:",id);
+        Emp emp = empService.queryById(id);
+        return Result.success(emp);
 
+    }
 }

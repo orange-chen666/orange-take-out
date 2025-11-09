@@ -12,8 +12,16 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      
 
-#   type: om.alibaba.druid.pool.DruidDatasource//连接池选择
+
+
+#   type: com.alibaba.druid.pool.DruidDatasource//连接池选择
 #mybatis的日志输出
 mybatis:
   configuration:
@@ -46,6 +54,7 @@ orange:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
 
 
 

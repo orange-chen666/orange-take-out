@@ -11,17 +11,14 @@ import com.orange.entity.Emp;
 import com.orange.mapper.EmpMapper;
 import com.orange.properties.JwtProperties;
 import com.orange.result.PageResult;
-import com.orange.result.Result;
 import com.orange.service.EmpService;
 import com.orange.utils.JwtUtil;
 import com.orange.vo.EmpLoginVO;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.Utils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +50,6 @@ public class EmpServiceImpl implements EmpService {
 //        emp.setUpdateTime(LocalDateTime.now());
         emp.setPassword("123456");
         emp.setStatus(1);
-        emp.setUpdateUser(1L);
-        emp.setCreateUser(1L);
         empMapper.add(emp);
     }
 
@@ -103,7 +98,29 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public void startOrStop(Integer status,Integer id) {
-        empMapper.starOrStop(status,id);
+    public void startOrStop(Integer status,Long id) {
+        Emp emp = new Emp();
+        emp.setStatus(status);
+        emp.setId(id);
+        empMapper.update(emp);
+    }
+
+    @Override
+    public void update(EmpDTO empDTO) {
+        Emp emp = new Emp();
+        BeanUtils.copyProperties(empDTO,emp);
+        log.info("要修改的员工信息：{}",emp);
+        empMapper.update(emp);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        empMapper.deleteById(id);
+    }
+
+    @Override
+    public Emp queryById(Long id) {
+
+        return empMapper.queryById(id);
     }
 }

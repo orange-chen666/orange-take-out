@@ -1,6 +1,7 @@
 package com.orange.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
+@Builder
 public class Emp {
     //private static final long serialVersionUID = 1L;
     private Long id;
