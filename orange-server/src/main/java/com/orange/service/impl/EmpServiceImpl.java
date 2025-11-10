@@ -102,6 +102,7 @@ public class EmpServiceImpl implements EmpService {
         Emp emp = new Emp();
         emp.setStatus(status);
         emp.setId(id);
+        log.info("要将人修改成的状态情况:{}",emp);
         empMapper.update(emp);
     }
 
