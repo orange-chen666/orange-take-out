@@ -54,6 +54,15 @@ orange:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    # 客户端
+    user-secret-key: orangeagoodtakeoutilikeitverymuchxixizdsadwdfwadwadda
+    user-ttl: 7200000
+    user-token-name: authentication
+
+#WeChat
+  wechat:
+    appid: wx664935500a484e8e
+    secret: 4c95be7fe8794731bbea2a1a5aaccf86
 
 
 

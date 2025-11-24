@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.mapper.DishMapper">
+    <update id="update">
+        update dish <set>
+        <if test="name != null">name = #{name},</if>
+        <if test="categoryId != null">category_id = #{categoryId},</if>
+        <if test="price != null">price = #{price},</if>
+        <if test="image != null">image = #{image},</if>
+        <if test="description != null">description = #{description},</if>
+        <if test="status != null">status = #{status},</if>
+        <if test="updateTime != null">update_time = #{updateTime},</if>
+        <if test="updateUser != null">update_user = #{updateUser},</if>
+    </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from dish
+            where in
+                <foreach collection="ids" open="(" separator="," item="id" close=")" >
+                    #{id}
+                </foreach>
+
+    </delete>
+    <!--    多表查询where name前面记得.那个表-->
+<!--    where 里面and都要加-->
+<!--    ，MyBatis 的 <where> 标签不会自动添加 AND，它只会删除多余的 AND 或 OR-->
+    <select id="pageQuery" parameterType="com.orange.dto.DishPageQueryDTO" resultType="com.orange.vo.DishVO">
+        select * , c.name as categoryName from dish d left join category c on d.category_id = c.id
+        <where>
+            <if test="name != null">and d.name like concate('%',#{name},'%') </if>
+            <if test="status != null">and d.status = #{status}</if>
+            <if test="categoryId != null">and  category_id = #{categoryId}</if>
+        </where>
+        order by d.update_time desc
+    </select>
+    <select id="list" resultType="com.orange.entity.Dish">
+        select * from dish
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            order by create_time desc
+        </where>
+    </select>
+</mapper>

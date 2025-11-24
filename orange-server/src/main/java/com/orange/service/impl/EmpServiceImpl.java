@@ -35,6 +35,10 @@ public class EmpServiceImpl implements EmpService {
 //        Page a = PageHelper.startPage(empPageQueryDTO);//不是得传页码，还有每页展示数量
 //        System.out.println(a);
         //Pge这东西得看看；
+        //PageHelper使用ThreadLocal来存储分页参数，保证线程安全性
+        //当调用startPage()方法后，紧跟的下一次查询会被拦截器捕获
+        //拦截器会自动重写SQL语句，添加相应的分页语法
+        //查询结果会被包装成Page对象，其中包含了分页相关的信息
         PageHelper.startPage(empPageQueryDTO.getPage(),empPageQueryDTO.getPageSize());
         Page<Emp> page = empMapper.pageQuery(empPageQueryDTO);
         Long total = page.getTotal();
