@@ -1,8 +1,10 @@
 package com.orange.dto;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class EmpDTO {
+public class EmpDTO implements Serializable {
     private Long id;
     private String username;
     private String name;

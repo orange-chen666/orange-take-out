@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 //implements Serializable 后面实现
 @Data
-public class Result<T> {
+public class Result<T> implements Serializable{
     private Integer code;
     private String msg;
     private T data;

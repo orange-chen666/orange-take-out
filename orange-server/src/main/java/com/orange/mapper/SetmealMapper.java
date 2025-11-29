@@ -2,9 +2,11 @@ package com.orange.mapper;
 
 import com.github.pagehelper.Page;
 import com.orange.dto.SetmealPageQueryDTO;
+import com.orange.dto.ShoppingCartDTO;
 import com.orange.entity.Setmeal;
 import com.orange.vo.DishItemVO;
 import com.orange.vo.SetmealVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -30,4 +32,8 @@ public interface SetmealMapper {
             "from setmeal_dish sd left join dish d on sd.dish_id = d.id " +
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
+
+    @Select("select * from setmeal where id = #{setmealId}")
+    Setmeal getById(Long setmealId);
+    void delete(ShoppingCartDTO shoppingCartDTO);
 }

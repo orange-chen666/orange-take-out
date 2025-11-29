@@ -10,9 +10,12 @@ import com.orange.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -20,6 +23,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 菜品分页查询
@@ -43,6 +48,7 @@ public class DishController {
     public Result upload(DishDTO dishDTO) {
         log.info("修改菜品:{}",dishDTO);
         dishService.upload(dishDTO);
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -55,6 +61,8 @@ public class DishController {
     public Result add(DishDTO dishDTO) {
         log.info("添加菜品:{}",dishDTO);
         dishService.add(dishDTO);
+        String key = "dish_" + dishDTO.getCategoryId();
+        cleanCache(key);
         return Result.success();
     }
     /**
@@ -82,6 +90,7 @@ public class DishController {
     public Result deleteByIds(List<Long> ids) {
         log.info("批量删除{}",ids);
         dishService.deleteByIds(ids);
+        cleanCache("dish_*");
         return Result.success();
     }
     /**
@@ -92,5 +101,9 @@ public class DishController {
         log.info("分类id{}",categoryId);
         List<Dish> dish = dishService.list(categoryId);
         return Result.success(dish);
+    }
+    private void cleanCache(String pattern) {
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }

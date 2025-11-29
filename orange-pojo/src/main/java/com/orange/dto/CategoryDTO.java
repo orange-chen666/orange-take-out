@@ -2,8 +2,10 @@ package com.orange.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class CategoryDTO {
+public class CategoryDTO implements Serializable {
     private Long id;
     //类型: 1菜品分类 2套餐分类
     private Integer type;

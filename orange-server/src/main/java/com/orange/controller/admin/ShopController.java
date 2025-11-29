@@ -16,23 +16,26 @@ public class ShopController {
 
     /**
      * 设置店铺的营业状态
+     *
      * @param status
      * @return
      */
-    @PutMapping("{status}")
-    public Result setStatus(@PathVariable Integer status){
-        log.info("收到店铺状态信息{}",status == 1 ? "营业中" : "打烊中");
-        redisTemplate.opsForValue().set(KEY,status);
+    @PutMapping("/{status}")
+    public Result setStatus(@PathVariable Integer status) {
+        log.info("收到店铺状态信息{}", status == 1 ? "营业中" : "打烊中");
+        redisTemplate.opsForValue().set(KEY, status);
         return Result.success();
     }
+
     /**
      * 获取店铺的营业状态
      */
-    @GetMapping("status")
+    @GetMapping("/status")
     public Result<Integer> getStatus() {
         log.info("获取店铺状态信息");
         Integer status = (Integer) redisTemplate.opsForValue().get(KEY);
-        log.info("店铺状态信息{}",status);
+        log.info("店铺状态信息{}", status);
         return Result.success(status);
     }
+
 }

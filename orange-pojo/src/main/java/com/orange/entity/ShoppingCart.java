@@ -8,27 +8,41 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+/**
+ * 购物车
+ */
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Dish implements Serializable {
+@AllArgsConstructor
+public class ShoppingCart implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private Long id;
-    //菜品名称
+
+    //名称
     private String name;
-    //菜品分类id
-    private Long categoryId;
-    //菜品价格
-    private BigDecimal price;
+
+    //用户id
+    private Long userId;
+
+    //菜品id
+    private Long dishId;
+
+    //套餐id
+    private Long setmealId;
+
+    //口味
+    private String dishFlavor;
+
+    //数量
+    private Integer number;
+
+    //金额
+    private BigDecimal amount;
+
     //图片
     private String image;
-    //描述信息
-    private String description;
-    //0 停售 1 起售
-    private Integer status;
+
     private LocalDateTime createTime;
-    private LocalDateTime updateTime;
-    private Long createUser;
-    private Long updateUser;
 }

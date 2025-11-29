@@ -28,6 +28,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true #驼峰映射启动不然得手动起别名
   mapper-locations: classpath:mapper/*.xml #映射地址
+ # type-aliases-package: com.sky.entity #在 com.sky.entity 包下扫描所有类，并为它们创建类型别名
 
 pagehelper:
   reasonable: true #页合理化参数，默认值为false。当该参数设置为true时，
