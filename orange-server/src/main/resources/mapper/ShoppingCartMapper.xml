@@ -14,12 +14,12 @@
         <set>
             <if test="name != null">name = #{name},</if>
             <if test="image != null">image = #{image},</if>
-            <if test="user_id != null">user_id = #{user_id},</if>
-            <if test="setmeal_id != null">setmeal_id = #{setmeal_id},</if>
-            <if test="dish_flavor != null">dish_flavor = #{dish_flavor},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="setmealId != null">setmeal_id = #{setmealId},</if>
+            <if test="dishFlavor != null">dish_flavor = #{dishFlavor},</if>
             <if test="number != null">number = #{number},</if>
             <if test="amount != null">amount = #{amount},</if>
-            <if test="create_time != null">create_time = #{create_time},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
         </set>
         where id = #{id}
     </update>
